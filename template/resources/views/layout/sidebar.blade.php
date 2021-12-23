@@ -3,87 +3,13 @@
     <li class="nav-item nav-profile not-navigation-link">
       <div class="nav-link">
         <div class="user-wrapper">
-          <div class="profile-image">
-            <img src="{{ url('assets/images/faces/face8.jpg') }}" alt="profile image">
-          </div>
-          <div class="text-wrapper">
-            <p class="profile-name">Richard V.Welsh</p>
-            <div class="dropdown" data-display="static">
-              <a href="#" class="nav-link d-flex user-switch-dropdown-toggler" id="UsersettingsDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <small class="designation text-muted">Manager</small>
-                <span class="status-indicator online"></span>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="UsersettingsDropdown">
-                <a class="dropdown-item p-0">
-                  <div class="d-flex border-bottom">
-                    <div class="py-3 px-4 d-flex align-items-center justify-content-center">
-                      <i class="mdi mdi-bookmark-plus-outline mr-0 text-gray"></i>
-                    </div>
-                    <div class="py-3 px-4 d-flex align-items-center justify-content-center border-left border-right">
-                      <i class="mdi mdi-account-outline mr-0 text-gray"></i>
-                    </div>
-                    <div class="py-3 px-4 d-flex align-items-center justify-content-center">
-                      <i class="mdi mdi-alarm-check mr-0 text-gray"></i>
-                    </div>
-                  </div>
-                </a>
-                <a class="dropdown-item mt-2"> Manage Accounts </a>
-                <a class="dropdown-item"> Change Password </a>
-                <a class="dropdown-item"> Check Inbox </a>
-                <a class="dropdown-item"> Sign Out </a>
-              </div>
-            </div>
-          </div>
+          
         </div>
         <button class="btn btn-success btn-block">New Project <i class="mdi mdi-plus"></i>
         </button>
       </div>
     </li>
-    {{-- <li class="nav-item {{ active_class(['/']) }}">
-      <a class="nav-link" href="{{ route('disokop.ukm') }}">
-        <i class="menu-icon mdi mdi-television"></i>
-        <span class="menu-title">UKM</span>
-      </a>
-    </li>
-    <li class="nav-item {{ active_class(['basic-ui/*']) }}">
-      <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="{{ is_active_route(['basic-ui/*']) }}" aria-controls="basic-ui">
-        <i class="menu-icon mdi mdi-dna"></i>
-        <span class="menu-title">Basic UI Elements</span>
-        <i class="menu-arrow"></i>
-      </a>
-      <div class="collapse {{ show_class(['basic-ui/*']) }}" id="basic-ui">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item {{ active_class(['basic-ui/buttons']) }}">
-            <a class="nav-link" href="{{ url('/basic-ui/buttons') }}">Buttons</a>
-          </li>
-          <li class="nav-item {{ active_class(['basic-ui/dropdowns']) }}">
-            <a class="nav-link" href="{{ url('/basic-ui/dropdowns') }}">Dropdowns</a>
-          </li>
-          <li class="nav-item {{ active_class(['basic-ui/typography']) }}">
-            <a class="nav-link" href="{{ url('/basic-ui/typography') }}">Typography</a>
-          </li>
-        </ul>
-      </div>
-    </li>
-
-    <li class="nav-item {{ active_class(['charts/chartjs']) }}">
-      <a class="nav-link" href="{{ url('/charts/chartjs') }}">
-        <i class="menu-icon mdi mdi-chart-line"></i>
-        <span class="menu-title">Charts</span>
-      </a>
-    </li>
-    <li class="nav-item {{ active_class(['tables/basic-table']) }}">
-      <a class="nav-link" href="{{ url('/tables/basic-table') }}">
-        <i class="menu-icon mdi mdi-table-large"></i>
-        <span class="menu-title">Tables</span>
-      </a>
-    </li>
-    <li class="nav-item {{ active_class(['icons/material']) }}">
-      <a class="nav-link" href="{{ url('/icons/material') }}">
-        <i class="menu-icon mdi mdi-emoticon"></i>
-        <span class="menu-title">Icons</span>
-      </a>
-    </li> --}}
+    
     {{-- diskop ukm --}}
     <li class="nav-item {{ active_class(['diskop-ukm/*']) }}">
       <a class="nav-link" data-toggle="collapse" href="#diskop-ukm" aria-expanded="{{ is_active_route(['diskop-ukm/*']) }}" aria-controls="user-pages">
@@ -345,6 +271,30 @@
           </li>
           <li class="nav-item {{ active_class(['disnaker/transmigrasi']) }}">
             <a class="nav-link" href="{{ route('disnaker.transmigrasi') }}"><i class="menu-icon mdi mdi-box-shadow"></i> Berdasarkan SPPD</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+    {{-- covid --}}
+    <li class="nav-item {{ active_class(['covid/*']) }}">
+      <a class="nav-link" data-toggle="collapse" href="#covid" aria-expanded="{{ is_active_route(['covid/*']) }}" aria-controls="user-pages">
+        <i class="menu-icon mdi mdi-lock-outline"></i>
+        <span class="menu-title">covid</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse {{ show_class(['covid/*']) }}" id="covid">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item {{ active_class(['covid/sebaran']) }}">
+            <a class="nav-link" href="{{ route('covid.sebaran') }}"><i class="menu-icon mdi mdi-box-shadow"></i> Berdasarkan Golongan</a>
+          </li>
+          <li class="nav-item {{ active_class(['covid/statistik']) }}">
+            <a class="nav-link" href="{{ route('covid.statistik') }}"><i class="menu-icon mdi mdi-box-shadow"></i> Berdasarkan Umur</a>
+          </li>
+          <li class="nav-item {{ active_class(['covid/rumahsakit']) }}">
+            <a class="nav-link" href="{{ route('covid.rumahsakit') }}"><i class="menu-icon mdi mdi-box-shadow"></i> Berdasarkan SPPD</a>
+          </li>
+          <li class="nav-item {{ active_class(['covid/vaksin']) }}">
+            <a class="nav-link" href="{{ route('covid.vaksin') }}"><i class="menu-icon mdi mdi-box-shadow"></i> Berdasarkan SPPD</a>
           </li>
         </ul>
       </div>

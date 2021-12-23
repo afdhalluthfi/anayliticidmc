@@ -9,6 +9,6 @@ class PrajawibawaContorller extends Controller
     //
     public function index () 
     {
-        echo "index";
+        return view('pages.koperasi');
     }
 }
