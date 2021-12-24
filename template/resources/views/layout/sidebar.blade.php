@@ -47,16 +47,16 @@
             <a class="nav-link" href="{{ route('simpeg.sppd') }}"><i class="menu-icon mdi mdi-box-shadow"></i> Berdasarkan Umur</a>
           </li>
           <li class="nav-item {{ active_class(['simpeg/pendidikan']) }}">
-            <a class="nav-link" href="{{ route('simpeg.pendidikan') }}"><i class="menu-icon mdi mdi-box-shadow"></i> Berdasarkan SPPD</a>
+            <a class="nav-link text-wrap" href="{{ route('simpeg.pendidikan') }}"><i class="menu-icon mdi mdi-box-shadow"></i> Berdasarkan SPPD</a>
           </li>
           <li class="nav-item {{ active_class(['simpeg/eselon']) }}">
-            <a class="nav-link" href="{{ route('simpeg.eselon') }}"><i class="menu-icon mdi mdi-box-shadow"></i> Berdasarkan Eselon</a>
+            <a class="nav-link text-wrap" href="{{ route('simpeg.eselon') }}"><i class="menu-icon mdi mdi-box-shadow"></i> Berdasarkan Eselon</a>
           </li>
           <li class="nav-item {{ active_class(['simpeg/absen']) }}">
-            <a class="nav-link" href="{{ route('simpeg.absen') }}"><i class="menu-icon mdi mdi-box-shadow"></i> Berdasarkan Absen 3 Hari</a>
+            <a class="nav-link text-wrap" href="{{ route('simpeg.absen') }}"><i class="menu-icon mdi mdi-box-shadow"></i> Berdasarkan Absen 3 Hari</a>
           </li>
           <li class="nav-item {{ active_class(['simpeg/pensiun']) }}">
-            <a class="nav-link" href="{{ route('simpeg.pensiun') }}"><i class="menu-icon mdi mdi-box-shadow"></i> Berdasarkan Yang Akan Pensiun</a>
+            <a class="nav-link text-wrap" href="{{ route('simpeg.pensiun') }}"><i class="menu-icon mdi mdi-box-shadow"></i> Berdasarkan Yang Akan Pensiun</a>
           </li>
         </ul>
       </div>

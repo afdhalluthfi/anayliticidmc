@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Repositories\KoperasiRepositories;
+use App\Repositories\KeragaanRepositories;
 
 class KoperasiController extends Controller
 {
@@ -18,9 +19,22 @@ class KoperasiController extends Controller
 
     public function index () 
     {
-        $data=$this->koperasirepositories->getUmkmPerkelas();
         // var_dump($data);
-        return view('pages.koperasi',compact('data'));
+        $data=$this->koperasirepositories->getUmkmPerkelas();
+        $dataKlasifikasi=$this->koperasirepositories->getDataKlasifikasi();
+        $dataPendidikan=$this->koperasirepositories->getDataPendidikan();
+        $dataKabupaten=$this->koperasirepositories->getDataKabupaten();
+        $dataEkraf=$this->koperasirepositories->getDataEkraf();
+        $dataGroup=$this->koperasirepositories->getDataPerGroup();
+        $dataDisabilitas=$this->koperasirepositories->getDataDisabilitas();
+        return view('pages.umkm',compact('data','dataKlasifikasi','dataPendidikan','dataKabupaten','dataEkraf','dataGroup','dataDisabilitas'));
+    }
+
+    public function kopindex()
+    { 
+        $data =$this->koperasirepositories->getKeragaanKoperasi();
+        $dataJenis =$this->koperasirepositories->getJenisKoperasi();
+        return view('pages.koperasi',compact('data','dataJenis'));
     }
 
 }

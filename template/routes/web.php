@@ -15,7 +15,7 @@ Route::get('/clear-cache', function() {
 });
 // diskop
 Route::group(['prefix'=>'diskop-ukm'],function(){
-    Route::get('koperasi','DashboardController@index')->name('disokop.koperasi');
+    Route::get('koperasi','KoperasiController@kopindex')->name('disokop.koperasi');
     Route::get('ukm', 'KoperasiController@index')->name('disokop.ukm');
 });
 //simpeg
