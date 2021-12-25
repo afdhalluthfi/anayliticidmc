@@ -1,11 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-
 use App\Repositories\KoperasiRepositories;
-use App\Repositories\KeragaanRepositories;
+
 
 class KoperasiController extends Controller
 {

@@ -6,7 +6,6 @@ use App\Http\Controllers\{KoperasiController,SimpegController,KependudukanContor
 Route::get('/', function () {
     return view('dashboard');
 });
-
 // Route::get('/','DashboardController@index');
 // For Clear cache
 Route::get('/clear-cache', function() {

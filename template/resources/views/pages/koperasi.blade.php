@@ -178,87 +178,18 @@
 @push('custom-scripts')
   <script>
       (function($) {
-    "use strict";
-    $(function() {
-        var lineChartStyleOption_1 = {
-            scales: {
-                yAxes: [
-                    {
-                        display: false
-                    }
-                ],
-                xAxes: [
-                    {
-                        display: false
-                    }
-                ]
-            },
-            legend: {
-                display: false
-            },
-            elements: {
-                point: {
-                    radius: 1
-                },
-                line: {
-                    tension: 0
-                }
-            },
-            stepsize: 100
-        };
-        
-        if ($("#dashboard-area-chart").length) {
-            var lineChartCanvas = $("#dashboard-area-chart")
-                .get(0)
-                .getContext("2d");
-            var data = {
-                labels: [<?php foreach ($dataJenis as $dt){ echo "'$dt[koperasi]',";} ?>],
-                datasets: [
-                    {
-                        label: "Pasif",
-                        data: [<?php foreach ($dataJenis as $dt){ echo "$dt[pasif],";} ?>],
-                        backgroundColor: "#2196f3",
-                        borderColor: "#0c83e2",
-                        borderWidth: 1,
-                        fill: true
-                    },
-                    {
-                        label: "Aktif",
-                        data: [<?php foreach ($dataJenis as $dt){ echo "$dt[aktif],";} ?>],
-                        backgroundColor: "#19d895",
-                        borderColor: "#15b67d",
-                        borderWidth: 1,
-                        fill: true
-                    },
-                    {
-                        label: "Jumlah",
-                        data: [<?php foreach ($dataJenis as $dt){ echo "$dt[jml_ap],";} ?>],
-                        backgroundColor: "red",
-                        borderColor: "#15b67d",
-                        borderWidth: 1,
-                        fill: true
-                    }
-                ]
-            };
-            var options = {
-                responsive: true,
-                maintainAspectRatio: true,
+        "use strict";
+        $(function() {
+            var lineChartStyleOption_1 = {
                 scales: {
                     yAxes: [
                         {
-                            gridLines: {
-                                color: "#F2F6F9"
-                            }
+                            display: false
                         }
                     ],
                     xAxes: [
                         {
-                            gridLines: {
-                                color: "#F2F6F9"
-                            },
-                            ticks: {
-                                beginAtZero: true
-                            }
+                            display: false
                         }
                     ]
                 },
@@ -267,106 +198,175 @@
                 },
                 elements: {
                     point: {
-                        radius: 2
+                        radius: 1
+                    },
+                    line: {
+                        tension: 0
                     }
                 },
-                layout: {
-                    padding: {
-                        left: 0,
-                        right: 0,
-                        top: 0,
-                        bottom: 0
-                    }
-                },
-                stepsize: 1
+                stepsize: 100
             };
-            var lineChart = new Chart(lineChartCanvas, {
-                type: "bar",
-                data: data,
-                options: options
-            });
-        }
-        if ($("#dashboard-area-chart-jenis").length) {
-            var lineChartCanvas = $("#dashboard-area-chart-jenis")
-                .get(0)
-                .getContext("2d");
-            var data = {
-                labels: [<?php foreach ($data as $dt){ echo "'$dt[koperasi]',";} ?>],
-                datasets: [
-                    {
-                        label: "Pasif",
-                        data: [<?php foreach ($data as $dt){ echo "$dt[pasif],";} ?>],
-                        backgroundColor: "#2196f3",
-                        borderColor: "#0c83e2",
-                        borderWidth: 1,
-                        fill: true
-                    },
-                    {
-                        label: "Aktif",
-                        data: [<?php foreach ($data as $dt){ echo "$dt[aktif],";} ?>],
-                        backgroundColor: "#19d895",
-                        borderColor: "#15b67d",
-                        borderWidth: 1,
-                        fill: true
-                    },
-                    {
-                        label: "Jumlah",
-                        data: [<?php foreach ($data as $dt){ echo "$dt[jml_ap],";} ?>],
-                        backgroundColor: "red",
-                        borderColor: "#15b67d",
-                        borderWidth: 1,
-                        fill: true
-                    }
-                ]
-            };
-            var options = {
-                responsive: true,
-                maintainAspectRatio: true,
-                scales: {
-                    yAxes: [
+            
+            if ($("#dashboard-area-chart").length) {
+                var lineChartCanvas = $("#dashboard-area-chart")
+                    .get(0)
+                    .getContext("2d");
+                var data = {
+                    labels: [<?php foreach ($dataJenis as $dt){ echo "'$dt[koperasi]',";} ?>],
+                    datasets: [
                         {
-                            gridLines: {
-                                color: "#F2F6F9"
-                            }
-                        }
-                    ],
-                    xAxes: [
+                            label: "Pasif",
+                            data: [<?php foreach ($dataJenis as $dt){ echo "$dt[pasif],";} ?>],
+                            backgroundColor: "#2196f3",
+                            borderColor: "#0c83e2",
+                            borderWidth: 1,
+                            fill: true
+                        },
                         {
-                            gridLines: {
-                                color: "#F2F6F9"
-                            },
-                            ticks: {
-                                beginAtZero: true
-                            }
+                            label: "Aktif",
+                            data: [<?php foreach ($dataJenis as $dt){ echo "$dt[aktif],";} ?>],
+                            backgroundColor: "#19d895",
+                            borderColor: "#15b67d",
+                            borderWidth: 1,
+                            fill: true
+                        },
+                        {
+                            label: "Jumlah",
+                            data: [<?php foreach ($dataJenis as $dt){ echo "$dt[jml_ap],";} ?>],
+                            backgroundColor: "red",
+                            borderColor: "#15b67d",
+                            borderWidth: 1,
+                            fill: true
                         }
                     ]
-                },
-                legend: {
-                    display: false
-                },
-                elements: {
-                    point: {
-                        radius: 2
-                    }
-                },
-                layout: {
-                    padding: {
-                        left: 0,
-                        right: 0,
-                        top: 0,
-                        bottom: 0
-                    }
-                },
-                stepsize: 1
-            };
-            var lineChart = new Chart(lineChartCanvas, {
-                type: "bar",
-                data: data,
-                options: options
+                };
+                var options = {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    scales: {
+                        yAxes: [
+                            {
+                                gridLines: {
+                                    color: "#F2F6F9"
+                                }
+                            }
+                        ],
+                        xAxes: [
+                            {
+                                gridLines: {
+                                    color: "#F2F6F9"
+                                },
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }
+                        ]
+                    },
+                    legend: {
+                        display: false
+                    },
+                    elements: {
+                        point: {
+                            radius: 2
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            left: 0,
+                            right: 0,
+                            top: 0,
+                            bottom: 0
+                        }
+                    },
+                    stepsize: 1
+                };
+                var lineChart = new Chart(lineChartCanvas, {
+                    type: "bar",
+                    data: data,
+                    options: options
+                });
+            }
+            if ($("#dashboard-area-chart-jenis").length) {
+                var lineChartCanvas = $("#dashboard-area-chart-jenis")
+                    .get(0)
+                    .getContext("2d");
+                var data = {
+                    labels: [<?php foreach ($data as $dt){ echo "'$dt[koperasi]',";} ?>],
+                    datasets: [
+                        {
+                            label: "Pasif",
+                            data: [<?php foreach ($data as $dt){ echo "$dt[pasif],";} ?>],
+                            backgroundColor: "#2196f3",
+                            borderColor: "#0c83e2",
+                            borderWidth: 1,
+                            fill: true
+                        },
+                        {
+                            label: "Aktif",
+                            data: [<?php foreach ($data as $dt){ echo "$dt[aktif],";} ?>],
+                            backgroundColor: "#19d895",
+                            borderColor: "#15b67d",
+                            borderWidth: 1,
+                            fill: true
+                        },
+                        {
+                            label: "Jumlah",
+                            data: [<?php foreach ($data as $dt){ echo "$dt[jml_ap],";} ?>],
+                            backgroundColor: "red",
+                            borderColor: "#15b67d",
+                            borderWidth: 1,
+                            fill: true
+                        }
+                    ]
+                };
+                var options = {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    scales: {
+                        yAxes: [
+                            {
+                                gridLines: {
+                                    color: "#F2F6F9"
+                                }
+                            }
+                        ],
+                        xAxes: [
+                            {
+                                gridLines: {
+                                    color: "#F2F6F9"
+                                },
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }
+                        ]
+                    },
+                    legend: {
+                        display: false
+                    },
+                    elements: {
+                        point: {
+                            radius: 2
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            left: 0,
+                            right: 0,
+                            top: 0,
+                            bottom: 0
+                        }
+                    },
+                    stepsize: 1
+                };
+                var lineChart = new Chart(lineChartCanvas, {
+                    type: "bar",
+                    data: data,
+                    options: options
+                });
+            }
+            
             });
-        }
-        
-    });
-})(jQuery);
+        })(jQuery);
   </script>
 @endpush
