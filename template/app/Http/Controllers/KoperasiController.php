@@ -31,7 +31,14 @@ class KoperasiController extends Controller
     { 
         $data =$this->koperasirepositories->getKeragaanKoperasi();
         $dataJenis =$this->koperasirepositories->getJenisKoperasi();
-        return view('pages.koperasi',compact('data','dataJenis'));
+        $dataBentuk=$this->koperasirepositories->getBentukKoperasi();
+        return view('pages.koperasi',compact('data','dataJenis','dataBentuk'));
+    }
+
+    public function peta () 
+    {
+        $dataBentuk=$this->koperasirepositories->getBentukKoperasi();
+        return view('pages.peta',compact('dataBentuk'));
     }
 
 }

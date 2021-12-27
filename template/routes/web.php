@@ -16,9 +16,7 @@ Route::get('/clear-cache', function() {
 Route::group(['prefix'=>'diskop-ukm'],function(){
     Route::get('koperasi','KoperasiController@kopindex')->name('disokop.koperasi');
     Route::get('ukm', 'KoperasiController@index')->name('disokop.ukm');
-    Route::get('peta', function () {
-        return view('pages.peta');
-    })->name('disokop.peta');
+    Route::get('peta', 'KoperasiController@peta')->name('disokop.peta');
 
 });
 //simpeg

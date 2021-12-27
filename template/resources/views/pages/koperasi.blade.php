@@ -2,14 +2,18 @@
 
 @push('plugin-styles')
   <!-- {!! Html::style('/assets/plugins/plugin.css') !!} -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 @endpush
- @php
+ 
+@section('content')
+<div class="row">
+  @php
         $sumAtf=0; //jml Aktif seluruh binaan koperasi
         $sumPsf=0; //jml Pasif seluruh binaan koperasi
         $jmlAgt=0; //jml Anggota seluruh binaan koperasi
         $jmlAP=0; //jml Aktif Pasif Seluruh Jenis Koperasi
+        $totBentu=0; // bentukoperasi
         foreach ($data as $dt ) {
-            # code...
             $sumAtf += $dt['aktif'];
             $sumPsf +=$dt['pasif'];
             $jmlAgt += $dt['jumlah_anggota'];
@@ -17,6 +21,10 @@
         foreach ($dataJenis as $dtj){
           $jmlAP += $dtj['jml_ap'];
         }
+        foreach ($dataBentuk as $btk){
+          $totBentu += $btk['jml_ap'];
+        }
+        $totBentu;
         $sumAtf;
         $sumPsf;
         $jmlAgt;
@@ -36,11 +44,10 @@
         $persenATF =sumpersen($sumAtf,$tot);
 
     @endphp
-@section('content')
-
+</div>
 <div class="row">
   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-    <div class="card card-statistics">
+    <div class="card card-statistics" data-aos='fade-up'>
       <div class="card-body">
         <div class="d-flex flex-md-column flex-xl-row flex-wrap justify-content-between align-items-md-center justify-content-xl-between">
           <div class="float-left">
@@ -58,7 +65,7 @@
       </div>
     </div>
   </div>
-  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" data-aos="fade-up" data-aos-delay='500'>
     <div class="card card-statistics">
       <div class="card-body">
         <div class="d-flex flex-md-column flex-xl-row flex-wrap justify-content-between align-items-md-center justify-content-xl-between">
@@ -66,18 +73,18 @@
             <i class="mdi mdi-receipt text-warning icon-lg"></i>
           </div>
           <div class="float-right">
-            <p class="mb-0 text-right">Orders</p>
+            <p class="mb-0 text-right">Bentuk Koperasi</p>
             <div class="fluid-container">
-              <h3 class="font-weight-medium text-right mb-0">3455</h3>
+              <h3 class="font-weight-medium text-right mb-0">{{$totBentu}}</h3>
             </div>
           </div>
         </div>
         <p class="text-muted mt-3 mb-0 text-left text-md-center text-xl-left">
-          <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i> Product-wise sales </p>
+          <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i> Jumlah Bentuk Koperasi Sekunder Primer </p>
       </div>
     </div>
   </div>
-  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" data-aos="fade-up" data-aos-delay='600'>
     <div class="card card-statistics">
       <div class="card-body">
         <div class="d-flex flex-md-column flex-xl-row flex-wrap justify-content-between align-items-md-center justify-content-xl-between">
@@ -96,7 +103,7 @@
       </div>
     </div>
   </div>
-  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" data-aos="fade-up" data-aos-delay='700'>
     <div class="card card-statistics">
       <div class="card-body">
         <div class="d-flex flex-md-column flex-xl-row flex-wrap justify-content-between align-items-md-center justify-content-xl-between">
@@ -117,8 +124,8 @@
   </div>
 </div>
 {{-- grafik koperasi --}}
-<div class="row">
-  <div class="col-md-6 grid-margin">
+<div class="row" data-aos="fade-up" data-aos-delay="800">
+  <div class="col-md-6 grid-margin" data-aos="fade-right" data-aos-delay="900">
     <div class="card">
       <div class="card-body">
         <div class="d-sm-flex justify-content-between align-items-center mb-4">
@@ -144,7 +151,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-6 grid-margin">
+  <div class="col-md-6 grid-margin" data-aos="fade-left" data-aos-delay="1000">
     <div class="card">
       <div class="card-body">
         <div class="d-sm-flex justify-content-between align-items-center mb-4">
@@ -183,10 +190,13 @@
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Binaan Koperasi</a>
                 </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="pills-bentuk-tab" data-toggle="pill" href="#pills-bentuk" role="tab" aria-controls="pills-bentuk" aria-selected="false">Bentuk Koperasi</a>
+                </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                    <table class="table table-bordered table-strip">
+                    <table class="table table-bordered table-strip table-responsive">
                         <thead>
                             <tr>
                                 <th>Koperasi Jenis</th>
@@ -216,7 +226,7 @@
                     </table>
                 </div>
                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                    <table class="table table-bordered table-strip">
+                    <table class="table table-bordered table-strip table-responsive">
                         <thead>
                             <tr>
                                 <th>Binaan Koperasi</th>
@@ -243,6 +253,34 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="tab-pane fade" id="pills-bentuk" role="tabpanel" aria-labelledby="pills-bentuk-tab">
+                    <table class="table table-bordered table-strip table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Bentuk Koperasi</th>
+                                <th>DIY</th>
+                                <th>BTL</th>
+                                <th>GK</th>
+                                <th>SLM</th>
+                                <th>KP</th>
+                                <th>Jumlah Aktif Pasif</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($dataBentuk as $item)
+                                    <tr>
+                                        <td>{{ $item['koperasi']}}</td>
+                                        <td>{{ $item['DIY']}}</td>
+                                        <td>{{ $item['BTL']}}</td>
+                                        <td>{{ $item['GK']}}</td>
+                                        <td>{{ $item['SLM']}}</td>
+                                        <td>{{ $item['KP']}}</td>
+                                        <td>{{$item['jml_ap']}}</td>
+                                    </tr>
+                                @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
           </div>
         </div>
@@ -250,7 +288,7 @@
 </div>
 {{-- diagram donat koperasi aktiv pasif --}}
 <div class="row">
-  <div class="col-sm-6 col-md-6 col-lg-6 grid-margin stretch-card">
+  <div class="col-sm-6 col-md-6 col-lg-6 grid-margin stretch-card"data-aos="fade-right" data-aos-delay="900">
     <div class="card">
       <div class="card-body">
         <div class="row">
@@ -288,18 +326,30 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-6 col-md-6 col-lg-6 grid-margin stretch-card">
+  <div class="col-sm-6 col-md-6 col-lg-6 grid-margin stretch-card" data-aos="fade-left" data-aos-delay="1000">
     <div class="card">
       <div class="card-body">
         <div class="row">
           <div class="col-md-7">
-            <h4 class="card-title font-weight-medium mb-3">Amount Due</h4>
-            <h1 class="font-weight-medium mb-0">$5998</h1>
-            <p class="text-muted">Milestone Completed</p>
-            <p class="mb-0">Payment for next week</p>
+            <h4 class="card-title font-weight-medium mb-0 d-none d-md-block"> Bentuk Koperasi</h4>
+            
+            @foreach ($dataBentuk as $item)
+              <div class="wrapper mt-4">
+              <div class="d-flex justify-content-between mb-2">
+                <div class="d-flex align-items-center">
+                  <p class="mb-0 font-weight-medium"></p>
+                  <small class="text-muted ml-2">{{$item['koperasi']}}</small>
+                </div>
+                <p class="mb-0 font-weight-medium">{{ceil(($item['jml_ap']/1936)*100)}}%</p>
+              </div>
+              <div class="progress">
+                <div class="<?php echo ($item['koperasi']=='Primer') ? 'progress-bar bg-success' : 'progress-bar bg-primary' ?>" role="progressbar" style="width:{{($item['jml_ap']/1936)*100}}%" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+            @endforeach
           </div>
           <div class="col-md-5 d-flex align-items-end mt-4 mt-md-0">
-            <canvas id="conversionBarChart" height="150"></canvas>
+            <canvas id="UsersDoughnutChart1" height="150"></canvas>
           </div>
         </div>
       </div>
@@ -554,8 +604,60 @@
                     options: doughnutPieOptions
                 });
             }
+            if ($("#UsersDoughnutChart1").length) {
+                var doughnutChartCanvas = $("#UsersDoughnutChart1")
+                    .get(0)
+                    .getContext("2d");
+                var doughnutPieData = {
+                    datasets: [
+                        {
+                            data: [<?php foreach ($dataBentuk as $dt){ echo "'$dt[jml_ap]',";} ?>],
+                            backgroundColor: [
+                                successColor,
+                                primaryColor,
+                                secondaryColor
+                            ],
+                            borderColor: [
+                                successColor,
+                                primaryColor,
+                                secondaryColor
+                            ]
+                        }
+                    ],
+                    labels: ["Primer", "Sekunder"]
+                };
+                var doughnutPieOptions = {
+                        cutoutPercentage: 70,
+                        animationEasing: "easeOutBounce",
+                        animateRotate: true,
+                        animateScale: false,
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        showScale: true,
+                    legend: {
+                        display: false
+                    },
+                    layout: {
+                        padding: {
+                            left: 0,
+                            right: 0,
+                            top: 0,
+                            bottom: 0
+                        }
+                    }
+                };
+                var doughnutChart = new Chart(doughnutChartCanvas, {
+                    type: "doughnut",
+                    data: doughnutPieData,
+                    options: doughnutPieOptions
+                });
+            }
             
         });
         })(jQuery);
+  </script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
   </script>
 @endpush
