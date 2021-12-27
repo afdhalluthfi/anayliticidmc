@@ -25,6 +25,9 @@
           <li class="nav-item {{ active_class(['diskop-ukm/ukm']) }}">
             <a class="nav-link" href="{{ route('disokop.ukm') }}"><i class="menu-icon mdi mdi-box-shadow"></i> UKM</a>
           </li>
+          <li class="nav-item {{ active_class(['diskop-ukm/peta']) }}">
+            <a class="nav-link" href="{{ route('disokop.peta') }}"><i class="menu-icon mdi mdi-box-shadow"></i> Peta</a>
+          </li>
         </ul>
       </div>
     </li>
