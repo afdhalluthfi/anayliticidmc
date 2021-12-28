@@ -90,42 +90,137 @@
 @push('plugin-scripts')
   {!! Html::script('/assets/plugins/chartjs/chart.min.js') !!}
   {!! Html::script('/assets/plugins/jquery-sparkline/jquery.sparkline.min.js') !!}
+  {!! Html::script('/assets/js/leaflet.groupedlayercontrol.js') !!}
 @endpush
 @push('custom-scripts')
  <script>
    (function($){
      $(function(){
-       var map = L.map('map').setView([-7.8913, 110.3700], 13);//-7.8913/110.3700
-       var tiles = L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png", {
-          maxZoom: 19,
-          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://cartodb.com/attributions">CartoDB</a>'
-        }).addTo(map);
+      //  var map = L.map('map').setView([-7.8913, 110.3700], 13);//-7.8913/110.3700
+      /* var tiles = L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: 
+      }).addTo(map); */
+      let kabBantul=L.layerGroup();
+      let kabSleman=L.layerGroup();
+      let kabKP=L.layerGroup();
+      let kabGK=L.layerGroup();
+      let kabDIY=L.layerGroup();
+      // kelurahan
+      let kelurbantul=L.layerGroup();
+      let kelursleman=L.layerGroup();
+      let kelurKP=L.layerGroup();
+      let kelurGK=L.layerGroup();
+      let kelurDIY=L.layerGroup();
+
+      // Datakabupaten
+      let bantul = fetch("{{ asset('assets/data/bantul.geojson')}}")
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(data) {
+              L.geoJSON(data).addTo(kabBantul);
+            })
+      let sleman = fetch("{{ asset('assets/data/sleman.geojson')}}")
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(data) {
+              L.geoJSON(data).addTo(kabSleman);
+            })
+      let gunungkidul = fetch("{{ asset('assets/data/gunungkidul.geojson')}}")
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(data) {
+              L.geoJSON(data).addTo(kabGK);
+            })
+      let kulonprogo = fetch("{{ asset('assets/data/kulonprogo.geojson')}}")
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(data) {
+              L.geoJSON(data).addTo(kabGK);
+            })
+      let diy = fetch("{{ asset('assets/data/yogyakarta.geojson')}}")
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(data) {
+              L.geoJSON(data).addTo(kabDIY);
+            })
+      //kelurahan
+      let kelurBantul = fetch("{{ asset('assets/data/kelurbantul.geojson')}}")
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(data) {
+              L.geoJSON(data).addTo(kelurbantul);
+            })
+      let kelurSleman = fetch("{{ asset('assets/data/kelursleman.geojson')}}")
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(data) {
+              L.geoJSON(data).addTo(kelursleman);
+            })
+      let kelurkp = fetch("{{ asset('assets/data/kelurkulonprogo.geojson')}}")
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(data) {
+              L.geoJSON(data).addTo(kelurKP);
+            })
+      let kelurgk = fetch("{{ asset('assets/data/kelurgunungkidul.geojson')}}")
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(data) {
+              L.geoJSON(data).addTo(kelurGK);
+            })
+      let kelurdiy = fetch("{{ asset('assets/data/keluryogya.geojson')}}")
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(data) {
+              L.geoJSON(data).addTo(kelurDIY);
+            })
+      
+      let mbUrl="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"      
+      let mbAttr='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://cartodb.com/attributions">CartoDB</a>'
+      let mapSmooth=L.tileLayer(mbUrl,{maxZoom: 19,attribution:mbAttr})
+      let map = L.map('map',{
+        center:[-7.8913, 110.3700],
+        zoom:10,
+        layers:[mapSmooth,kabBantul,kabGK,kabDIY,kabSleman,kabKP,kelurbantul,kelursleman,kelurGK,kelurDIY,kelurKP]
+      });
+
+      let baseLayers={
+        'mapsmooth':mapSmooth
+      };
+      let groupedOverlays = {
+        'kabupaten':{
+          'Bantul':kabBantul,
+          'Sleman':kabSleman,
+          'Kulonprogo':kabKP,
+          'Gunung Kidul':kabGK,
+          'DIY':kabDIY
+        },
+        'kelurahan':{
+          'kel.bantul':kelurbantul,
+          'kel.sleman':kelursleman,
+          'kel.kulonprogo':kelurKP,
+          'kel.gunungkidul':kelurGK,
+          'kel.diy':kelurDIY
+        }
+      }
+      let layerControl=L.control.groupedLayers(baseLayers,groupedOverlays).addTo(map);
       function onMapClick(e) {
         popup
-          .setLatLng(e.latlng)
-          .setContent('You clicked the map at ' + e.latlng.toString())
-          .openOn(map);
-          }
-        
-
-
-      L.geoJSON("{{ asset('assets/data/bantul.geojson')}}", {
-           style: function (feature) {
-                  return {
-                      color: "#6930c3",
-                      fill: true,
-                      opacity: .2,
-                      clickable: false
-                    };
-                },
-                onEachFeature: function(feature, layer) {
-                    bantulSearch.push({
-                    name: layer.feature.properties.KAB_KOTA,
-                    source: "Bantul",
-                    bounds: layer.getBounds()
-                });
-                }
-      }).addTo(map);
+        .setLatLng(e.latlng)
+        .setContent('You clicked the map at ' + e.latlng.toString())
+        .openOn(map);
+      }
       map.on('click', onMapClick);
     
      });
