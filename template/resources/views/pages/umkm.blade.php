@@ -3,42 +3,97 @@
 @push('plugin-styles')
   <!-- {!! Html::style('/assets/plugins/plugin.css') !!} -->
 @endpush
-
 @section('content')
 <div class="row">
-  {{-- binaan --}}
-  <div class="col-sm-4 col-md-4 col-lg-4 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <div class="row">
-            <canvas id="conversionBarChart" height="150"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
-  {{-- klasifikasi --}}
-  <div class="col-sm-4 col-md-6 col-lg-4 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <div class="row">
-            <canvas id="conversionBarChart1" height="150"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
-  {{-- pendidikan --}}
-  <div class="col-sm-4 col-md-6 col-lg-4 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <div class="row">
-            <canvas id="conversionBarChart2" height="150"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  
+    @php
+        $totUkmKab=0;
+        $totPendapatan=0;
+        $totAset=0;
+        foreach($dataKabupaten as $kab){$totUkmKab +=$kab['jumlah'];}
+        foreach($dataKlasifikasi as $kab){$totPendapatan += $kab['omset']; $totAset += $kab['aset'];}
+        
+    @endphp
 </div>
+{{-- card --}}
+<div class="row">
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+    <div class="card card-statistics" data-aos='fade-up'>
+      <div class="card-body">
+        <div class="d-flex flex-md-column flex-xl-row flex-wrap justify-content-between align-items-md-center justify-content-xl-between">
+          <div class="float-left">
+            <i class="mdi mdi-cube text-danger icon-lg"></i>
+          </div>
+          <div class="float-right">
+            <p class="mb-0 text-right">UMKM Kabupaten</p>
+            <div class="fluid-container">
+              <h3 class="font-weight-medium text-right mb-0">{{$totUkmKab}}</h3>
+            </div>
+          </div>
+        </div>
+        <p class="text-muted mt-3 mb-0 text-left text-md-center text-xl-left">
+          <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> Total UMKM Kabupaten </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" data-aos="fade-up" data-aos-delay='500'>
+    <div class="card card-statistics">
+      <div class="card-body">
+        <div class="d-flex flex-md-column flex-xl-row flex-wrap justify-content-between align-items-md-center justify-content-xl-between">
+          <div class="float-left">
+            <i class="mdi mdi-receipt text-warning icon-lg"></i>
+          </div>
+          <div class="float-right">
+            <p class="mb-0 text-right">Total Pendapatan UMKM</p>
+            <div class="fluid-container">
+              <h3 class="font-weight-medium text-right mb-0">{{'Rp.'.number_format($totPendapatan)}}</h3>
+            </div>
+          </div>
+        </div>
+        <p class="text-muted mt-3 mb-0 text-left text-md-center text-xl-left">
+          <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i> Total Pendaptan UMKM </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" data-aos="fade-up" data-aos-delay='600'>
+    <div class="card card-statistics">
+      <div class="card-body">
+        <div class="d-flex flex-md-column flex-xl-row flex-wrap justify-content-between align-items-md-center justify-content-xl-between">
+          <div class="float-left">
+            <i class="mdi mdi-poll-box text-success icon-lg"></i>
+          </div>
+          <div class="float-right">
+            <p class="mb-0 text-right">Aset</p>
+            <div class="fluid-container">
+              <h3 class="font-weight-medium text-right mb-0">{{'Rp.'.number_format($totAset)}}</h3>
+            </div>
+          </div>
+        </div>
+        <p class="text-muted mt-3 mb-0 text-left text-md-center text-xl-left">
+          <i class="mdi mdi-calendar mr-1" aria-hidden="true"></i>Total Aset</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" data-aos="fade-up" data-aos-delay='700'>
+    <div class="card card-statistics">
+      <div class="card-body">
+        <div class="d-flex flex-md-column flex-xl-row flex-wrap justify-content-between align-items-md-center justify-content-xl-between">
+          <div class="float-left">
+            <i class="mdi mdi-account-box-multiple text-info icon-lg"></i>
+          </div>
+          <div class="float-right">
+            <p class="mb-0 text-right">Anggota Binaan Koperasi</p>
+            <div class="fluid-container">
+              <h3 class="font-weight-medium text-right mb-0">0</h3>
+            </div>
+          </div>
+        </div>
+        <p class="text-muted mt-3 mb-0 text-left text-md-center text-xl-left">
+          <i class="mdi mdi-reload mr-1" aria-hidden="true"></i> Total Seluruh Anggota </p>
+      </div>
+    </div>
+  </div>
+</div>
+{{-- grafik --}}
 <div class="row">
   <div class="col-md-12 grid-margin">
     <div class="card">
@@ -63,16 +118,7 @@
     </div>
   </div>
 </div>
-<div class="row d-none">
-    @php
-        $dataEkraf;
-        $dataGroup;
-        $dataDisabilitas;
-        echo "<pre>";
-            print_r($dataPendidikan);
-        echo "</pre>";
-    @endphp
-</div>
+{{-- tabel --}}
 <div class="row">
     <div class="col-md-12 grid-margin">
         <div class="card">

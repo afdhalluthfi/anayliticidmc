@@ -112,6 +112,34 @@
       let kelurKP=L.layerGroup();
       let kelurGK=L.layerGroup();
       let kelurDIY=L.layerGroup();
+      var subwayColors = {
+            "1": "#ff3135",
+            "2": "#ff3135",
+            "3": "ff3135",
+            "4": "#009b2e",
+            "5": "#009b2e",
+            "BANTUL": "#009b2e",
+            "SLEMAN": "#ce06cb",
+            "GUNUNGKIDUL": "#fd9a00",
+            "KULON PROGO": "#fd9a00",
+            "KOTA YOGYAKARTA": "#fd9a00",
+            "SI": "#fd9a00",
+            "H": "#fd9a00",
+            "Air": "#ffff00",
+            "B": "#ffff00",
+            "D": "#ffff00",
+            "F": "#ffff00",
+            "M": "#ffff00",
+            "G": "#9ace00",
+            "FS": "#6e6e6e",
+            "GS": "#6e6e6e",
+            "J": "#976900",
+            "Z": "#976900",
+            "L": "#969696",
+            "N": "#ffff00",
+            "Q": "#ffff00",
+            "R": "#ffff00"
+    };
 
       // Datakabupaten
       let bantul = fetch("{{ asset('assets/data/bantul.geojson')}}")
@@ -119,73 +147,198 @@
               return response.json();
             })
             .then(function(data) {
-              L.geoJSON(data).addTo(kabBantul);
+              L.geoJSON(data,{
+                style: function(feature) {
+                      return {
+                        color: subwayColors[feature.properties.KAB_KOTA],
+                        weight: 3,
+                        opacity: 1
+                      };
+                }  
+              }).addTo(kabBantul);
             })
       let sleman = fetch("{{ asset('assets/data/sleman.geojson')}}")
             .then(function(response) {
               return response.json();
             })
             .then(function(data) {
-              L.geoJSON(data).addTo(kabSleman);
+              L.geoJSON(data,{
+                style: function(feature) {
+                  return {
+                    color: "#168AAD",
+                    fill: true,
+                    opacity: .2,
+                    clickable: false
+                  };
+                },
+              }).addTo(kabSleman);
             })
       let gunungkidul = fetch("{{ asset('assets/data/gunungkidul.geojson')}}")
             .then(function(response) {
               return response.json();
             })
             .then(function(data) {
-              L.geoJSON(data).addTo(kabGK);
+              L.geoJSON(data,{
+                style: function(feature) {
+                  return {
+                    color: "#6930c3",
+                    fill: true,
+                    opacity: .2,
+                    clickable: false
+                  };
+                },
+              }).addTo(kabGK);
             })
       let kulonprogo = fetch("{{ asset('assets/data/kulonprogo.geojson')}}")
             .then(function(response) {
               return response.json();
             })
             .then(function(data) {
-              L.geoJSON(data).addTo(kabGK);
+              L.geoJSON(data,{
+                style: function(feature) {
+                  return {
+                    color: "#34A0A4",
+                    fill: true,
+                    opacity: 0.5,
+
+                  };
+                },
+              }).addTo(kabGK);
             })
       let diy = fetch("{{ asset('assets/data/yogyakarta.geojson')}}")
             .then(function(response) {
               return response.json();
             })
             .then(function(data) {
-              L.geoJSON(data).addTo(kabDIY);
+              L.geoJSON(data,{
+                style: function(feature) {
+                  return {
+                    color: "#ae2012",
+                    fill: true,
+                    opacity: 0.2,
+
+                  };
+                },
+              }).addTo(kabDIY);
             })
       //kelurahan
-      let kelurBantul = fetch("{{ asset('assets/data/kelurbantul.geojson')}}")
+      let kelurBantul = fetch("{{ asset('assets/data/bantulbaru.geojson')}}")
             .then(function(response) {
               return response.json();
             })
             .then(function(data) {
-              L.geoJSON(data).addTo(kelurbantul);
+              L.geoJSON(data,{
+                style: function(feature) {
+                    return {
+                      color: subwayColors[feature.properties.KAB_KOTA],
+                      weight: 3,
+                      opacity: 1
+                    };
+              },
+                onEachFeature: function(feature, layer) {
+                      if (feature.properties) {
+                            var content = "<table class='table table-striped table-bordered table-condensed'>" +
+                              "<tr><th>Kecamatan</th><td>" + feature.properties.KECAMATAN + "</td></tr>" +
+                              "<tr><th>DEsa</th><td>" + feature.properties.DESA_KELUR + "</td></tr>" +
+                              "<table>";
+                            layer.bindPopup(content);
+                      } 
+                }
+              }).addTo(kelurbantul);
             })
-      let kelurSleman = fetch("{{ asset('assets/data/kelursleman.geojson')}}")
+      let kelurSleman = fetch("{{ asset('assets/data/slemanbaru.geojson')}}")
             .then(function(response) {
               return response.json();
             })
             .then(function(data) {
-              L.geoJSON(data).addTo(kelursleman);
+              L.geoJSON(data,{
+                style: function(feature) {
+                  return {
+                    color: subwayColors[feature.properties.KAB_KOTA],
+                    weight: 3,
+                    opacity: 1
+                  };
+                },
+                onEachFeature: function(feature, layer) {
+                      if (feature.properties) {
+                            var content = "<table class='table table-striped table-bordered table-condensed'>" +
+                              "<tr><th>Kecamatan</th><td>" + feature.properties.KECAMATAN + "</td></tr>" +
+                              "<tr><th>Desa</th><td>" + feature.properties.DESA_KELUR + "</td></tr>" +
+                              "<table>";
+                            layer.bindPopup(content);
+                      } 
+                }
+              }).addTo(kelursleman);
             })
-      let kelurkp = fetch("{{ asset('assets/data/kelurkulonprogo.geojson')}}")
+      let kelurkp = fetch("{{ asset('assets/data/kpbaru.geojson')}}")
             .then(function(response) {
               return response.json();
             })
             .then(function(data) {
-              L.geoJSON(data).addTo(kelurKP);
+              L.geoJSON(data,{
+                onEachFeature: function(feature, layer) {
+                      if (feature.properties) {
+                            var content = "<table class='table table-striped table-bordered table-condensed'>" +
+                              "<tr><th>Kecamatan</th><td>" + feature.properties.KECAMATAN + "</td></tr>" +
+                              "<tr><th>Desa</th><td>" + feature.properties.DESA_KELUR + "</td></tr>" +
+                              "<table>";
+                            layer.bindPopup(content);
+                      } 
+                }
+              }).addTo(kelurKP);
             })
-      let kelurgk = fetch("{{ asset('assets/data/kelurgunungkidul.geojson')}}")
+      let kelurgk = fetch("{{ asset('assets/data/gkbaru.geojson')}}")
             .then(function(response) {
               return response.json();
             })
             .then(function(data) {
-              L.geoJSON(data).addTo(kelurGK);
+              L.geoJSON(data,{
+                style: function(feature) {
+                  return {
+                    color: subwayColors[feature.properties.KAB_KOTA],
+                    weight: 3,
+                    opacity: 1
+                  };
+                },
+                onEachFeature: function(feature, layer) {
+                      if (feature.properties) {
+                            var content = "<table class='table table-striped table-bordered table-condensed'>" +
+                              "<tr><th>Kecamatan</th><td>" + feature.properties.KECAMATAN + "</td></tr>" +
+                              "<tr><th>Desa</th><td>" + feature.properties.DESA_KELUR + "</td></tr>" +
+                              "<table>";
+                            layer.bindPopup(content);
+                      } 
+                }
+              }).addTo(kelurGK);
             })
-      let kelurdiy = fetch("{{ asset('assets/data/keluryogya.geojson')}}")
+      let kelurdiy = fetch("{{ asset('assets/data/kotabaru.geojson')}}")
             .then(function(response) {
               return response.json();
             })
             .then(function(data) {
-              L.geoJSON(data).addTo(kelurDIY);
+              L.geoJSON(data,{
+                style: function(feature) {
+                  return {
+                    color: subwayColors[feature.properties.KAB_KOTA],
+                    weight: 3,
+                    opacity: 1
+                  };
+                },
+                onEachFeature: function(feature, layer) {
+                      if (feature.properties) {
+                            var content = "<table class='table table-striped table-bordered table-condensed'>" +
+                              "<tr><th>Kecamatan</th><td>" + feature.properties.KECAMATAN + "</td></tr>" +
+                              "<tr><th>Desa</th><td>" + feature.properties.DESA_KELUR + "</td></tr>" +
+                              "<table>";
+                            layer.bindPopup(content);
+                      } 
+                }}).addTo(kelurDIY);
             })
       
+      let myLayer = L.geoJson(false, {
+                onEachFeature: onEachFeature
+          }).addTo(this.map);
+      myLayer.addData(geojsonFeature);      
       let mbUrl="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"      
       let mbAttr='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://cartodb.com/attributions">CartoDB</a>'
       let mapSmooth=L.tileLayer(mbUrl,{maxZoom: 19,attribution:mbAttr})
@@ -215,13 +368,6 @@
         }
       }
       let layerControl=L.control.groupedLayers(baseLayers,groupedOverlays).addTo(map);
-      function onMapClick(e) {
-        popup
-        .setLatLng(e.latlng)
-        .setContent('You clicked the map at ' + e.latlng.toString())
-        .openOn(map);
-      }
-      map.on('click', onMapClick);
     
      });
        

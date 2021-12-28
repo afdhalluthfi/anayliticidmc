@@ -18,6 +18,7 @@
   <!-- end plugin css -->
 
   @stack('plugin-styles')
+  @stack('costume-styles')
 
   <!-- common css -->
   {!! Html::style('css/app.css') !!}

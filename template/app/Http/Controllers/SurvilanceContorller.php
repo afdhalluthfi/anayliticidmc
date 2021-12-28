@@ -16,10 +16,8 @@ class SurvilanceContorller extends Controller
     public function index () 
     {
         // dd('helo');
-        $getBodyShaming= $this->survilance->getDataCCTV();
-        echo "<pre>";
-            var_dump($getBodyShaming);
-        echo "</pre>";
-        // return view('pages.koperasi');
+        $getBodyShaming= $this->survilance->getData();
+       
+        return view('pages.survilance',compact('getBodyShaming'));
     }
 }
